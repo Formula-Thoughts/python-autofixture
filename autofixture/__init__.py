@@ -5,7 +5,7 @@ import uuid
 from enum import Enum
 from random import random
 
-from src.exceptions import AutoFixtureException
+from autofixture.exceptions import AutoFixtureException
 
 T = typing.TypeVar("T")
 

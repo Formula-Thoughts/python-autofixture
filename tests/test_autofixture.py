@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from unittest import TestCase
 
-from src import AutoFixture
+from autofixture import AutoFixture
 
 
 class TestEnum(Enum):
