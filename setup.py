@@ -14,10 +14,10 @@ setup(
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
     install_requires=[],
-    keywords=['python', 'video', 'stream', 'video stream', 'camera stream', 'sockets'],
+    keywords=['python', 'autofixture', 'python autofixture', 'python testing', 'python autofixture c#'],
     classifiers=[
-        "Development Status :: Who Fucking Knows",
-        "Intended Audience :: Anyone who can be bothered to install it",
+        "Development Status :: 1 - Planning",
+        "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
         "Operating System :: Unix"
     ]
