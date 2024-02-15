@@ -1,13 +1,12 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1'
 DESCRIPTION = 'A Version of C#s AutoFixture but for python'
 LONG_DESCRIPTION = 'Allows creating of fake test data that autogenerates both primitive and deep object graph types'
 
 # Setting up
 setup(
     name="python-autofixture",
-    version=VERSION,
+    version="{{VERSION_PLACEHOLDER}}",
     author="GanTheMan",
     author_email="aidanwilliamgannon@gmail.com",
     description=DESCRIPTION,
