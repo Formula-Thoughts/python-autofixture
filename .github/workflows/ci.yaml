@@ -21,4 +21,4 @@ jobs:
       - name: Publish package to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          password: ${{ secrets.PY_PI_TOKEN }}
+          password: ${{ secrets.PI_PY_ACCESS_TOKEN }}
