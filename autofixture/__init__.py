@@ -1,9 +1,8 @@
 import datetime
-import random
 import typing
 import uuid
 from enum import Enum
-from random import random
+import random as rand
 
 from autofixture.exceptions import AutoFixtureException
 
@@ -135,7 +134,7 @@ class AutoFixture:
                                                           nest=nest + 1))
         else:
             value_for_given_member = []
-            for i in range(0, random.randint(0, list_limit)):
+            for i in range(0, rand.randint(0, list_limit)):
                 value_for_given_member.append(self.create(dto=_type,
                                                           seed=seed,
                                                           num=num,
@@ -152,8 +151,8 @@ class AutoFixture:
                 value_for_given_member.append(enum_iterable[index])
         else:
             value_for_given_member = []
-            for i in range(0, random.randint(0, list_limit)):
-                value_for_given_member.append(random.choice(list(_type)))
+            for i in range(0, rand.randint(0, list_limit)):
+                value_for_given_member.append(rand.choice(list(_type)))
         setattr(new_value, key, value_for_given_member)
 
     def __generate_random_enum_field(self, _type, is_predictable_data, key, new_value, num):
@@ -163,7 +162,7 @@ class AutoFixture:
             index = num % length
             value_for_given_member = enum_iterable[index]
         else:
-            value_for_given_member = random.choice(list(_type))
+            value_for_given_member = rand.choice(list(_type))
         setattr(new_value, key, value_for_given_member)
 
     def __generate_datetime_list_field(self, is_predictable_data, key, new_value, num, list_limit):
@@ -173,7 +172,7 @@ class AutoFixture:
                 value_for_given_member.append(datetime.datetime(2, 2, 2, 2, 2, 2))
         else:
             value_for_given_member = []
-            for i in range(0, random.randint(0, list_limit)):
+            for i in range(0, rand.randint(0, list_limit)):
                 value_for_given_member.append(datetime.datetime.utcnow())
         setattr(new_value, key, value_for_given_member)
 
@@ -184,8 +183,8 @@ class AutoFixture:
                 value_for_given_member.append(bool(num))
         else:
             value_for_given_member = []
-            for i in range(0, random.randint(0, list_limit)):
-                value_for_given_member.append(random.choice([True, False]))
+            for i in range(0, rand.randint(0, list_limit)):
+                value_for_given_member.append(rand.choice([True, False]))
         setattr(new_value, key, value_for_given_member)
 
     def __generate_datetime_field(self, is_predictable_data, key, new_value, num):
@@ -199,7 +198,7 @@ class AutoFixture:
         if is_predictable_data:
             value_for_given_member = bool(num)
         else:
-            value_for_given_member = random.choice([True, False])
+            value_for_given_member = rand.choice([True, False])
         setattr(new_value, key, value_for_given_member)
 
     @staticmethod
@@ -214,8 +213,8 @@ class AutoFixture:
                 value_for_given_member.append(value_for_given_member_item)
         else:
             value_for_given_member = []
-            for i in range(0, random.randint(0, list_limit)):
-                value_for_given_member.append(random.uniform(0, 100))
+            for i in range(0, rand.randint(0, list_limit)):
+                value_for_given_member.append(rand.uniform(0, 100))
         setattr(new_value, key, value_for_given_member)
 
     @staticmethod
@@ -226,8 +225,8 @@ class AutoFixture:
                 value_for_given_member.append(num + i)
         else:
             value_for_given_member = []
-            for i in range(0, random.randint(0, list_limit)):
-                value_for_given_member.append(random.randint(0, 100))
+            for i in range(0, rand.randint(0, list_limit)):
+                value_for_given_member.append(rand.randint(0, 100))
         setattr(new_value, key, value_for_given_member)
 
     def __generate_str_list_field(self, is_predictable_data, key, new_value, num, seed, list_limit):
@@ -239,7 +238,7 @@ class AutoFixture:
                 value_for_given_member.append(value_for_given_member_item)
         else:
             value_for_given_member = []
-            for i in range(0, random.randint(0, list_limit)):
+            for i in range(0, rand.randint(0, list_limit)):
                 value_for_given_member_item = key
                 value_for_given_member_item = f"{value_for_given_member_item}{self.__generate_random_seed()}"
                 value_for_given_member.append(value_for_given_member_item)
@@ -264,7 +263,7 @@ class AutoFixture:
                 trailing_decimals = f"{trailing_decimals}{num}"
             value_for_given_member = float(f"{num}.{trailing_decimals}")
         else:
-            value_for_given_member = random.uniform(0, 100)
+            value_for_given_member = rand.uniform(0, 100)
         setattr(new_value, key, value_for_given_member)
 
     @staticmethod
@@ -272,7 +271,7 @@ class AutoFixture:
         if is_predictable_data:
             value_for_given_member = num
         else:
-            value_for_given_member = random.randint(0, 100)
+            value_for_given_member = rand.randint(0, 100)
         setattr(new_value, key, value_for_given_member)
 
     def __generate_string_field(self, is_predictable_data, key, new_value, seed):
