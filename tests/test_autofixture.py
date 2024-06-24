@@ -126,7 +126,7 @@ class TestAutoFixture(TestCase):
             self.assertEqual(dto.list_of_dates[1].second, 2)
 
         with self.subTest(msg="nested objects match"):
-            self.assertEqual(dto.decimal_num, 2.22)
+            self.assertEqual(dto.decimal_num, Decimal('2.22'))
             self.assertEqual(dto.nested.id, "id1234")
             self.assertEqual(dto.nested.name, "name1234")
 
