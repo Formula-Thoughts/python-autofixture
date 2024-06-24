@@ -1,5 +1,6 @@
 import datetime
 from dataclasses import dataclass, field
+from decimal import Decimal
 from enum import Enum
 from unittest import TestCase
 
@@ -55,10 +56,12 @@ class TestDto(InheritedDto):
     list_of_strings: list[str] = None
     list_of_ints: list[int] = None
     list_of_floats: list[float] = None
+    list_of_decimals: list[Decimal] = None
     list_of_bools: list[bool] = None
     date: datetime.datetime = None
     list_of_dates: list[datetime.datetime] = None
-    decimal_num: float = None
+    float_num: float = None
+    decimal_num: Decimal = None
     nested: NestedTestDto = None
     nested_list: list[NestedTestDto] = None
 

@@ -1,6 +1,8 @@
 import datetime
+import decimal
 import typing
 import uuid
+from decimal import Decimal
 from enum import Enum
 import random as rand
 
@@ -87,6 +89,9 @@ class AutoFixture:
                 if _type is float:
                     self.__generate_float_field(is_predictable_data, key, new_value, num)
 
+                if _type is Decimal:
+                    self.__generate_decimal_field(is_predictable_data, key, new_value, num)
+
                 if _type == list[str]:
                     self.__generate_str_list_field(is_predictable_data, key, new_value, num, seed, list_limit)
 
@@ -101,6 +106,9 @@ class AutoFixture:
 
                 if _type == list[float]:
                     self.__generate_float_list_field(is_predictable_data, key, new_value, num, list_limit)
+
+                if _type == list[decimal.Decimal]:
+                    self.__generate_decimal_list_field(is_predictable_data, key, new_value, num, list_limit)
 
                 if type(_type) is type(Enum):
                     self.__generate_random_enum_field(_type, is_predictable_data, key, new_value, num)
@@ -218,6 +226,22 @@ class AutoFixture:
         setattr(new_value, key, value_for_given_member)
 
     @staticmethod
+    def __generate_decimal_list_field(is_predictable_data, key, new_value, num, list_limit):
+        if is_predictable_data:
+            value_for_given_member = []
+            for i in range(0, num):
+                trailing_decimals = ""
+                for i in range(0, num):
+                    trailing_decimals = f"{trailing_decimals}{num}"
+                value_for_given_member_item = float(f"{num}.{trailing_decimals}")
+                value_for_given_member.append(Decimal(str(value_for_given_member_item)))
+        else:
+            value_for_given_member = []
+            for i in range(0, rand.randint(0, list_limit)):
+                value_for_given_member.append(Decimal(str(rand.uniform(0, 100))))
+        setattr(new_value, key, value_for_given_member)
+
+    @staticmethod
     def __generate_int_list_field(is_predictable_data, key, new_value, num, list_limit):
         if is_predictable_data:
             value_for_given_member = []
@@ -265,6 +289,17 @@ class AutoFixture:
         else:
             value_for_given_member = rand.uniform(0, 100)
         setattr(new_value, key, value_for_given_member)
+
+    @staticmethod
+    def __generate_decimal_field(is_predictable_data, key, new_value, num):
+        if is_predictable_data:
+            trailing_decimals = ""
+            for i in range(0, num):
+                trailing_decimals = f"{trailing_decimals}{num}"
+            value_for_given_member = float(f"{num}.{trailing_decimals}")
+        else:
+            value_for_given_member = rand.uniform(0, 100)
+        setattr(new_value, key, Decimal(str(value_for_given_member)))
 
     @staticmethod
     def __generate_int_field(is_predictable_data, key, new_value, num):
