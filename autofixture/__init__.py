@@ -342,6 +342,6 @@ def has_type_hints(t):
     else:
         # Normal class/type, try to get hints safely
         try:
-            return bool(get_type_hints(t))
+            return bool(typing.get_type_hints(t))
         except Exception:
             return False
