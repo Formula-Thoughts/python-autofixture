@@ -330,10 +330,10 @@ def all_annotations(cls):
     return d
 
 def has_type_hints(t):
-    origin = get_origin(t)
+    origin = typing.get_origin(t)
     if origin is not None:
         # It's a generic like list[LayoutItem], get the inner type(s)
-        args = get_args(t)
+        args = typing.get_args(t)
         # For simplicity, just check the first arg recursively
         if args:
             return has_type_hints(args[0])
