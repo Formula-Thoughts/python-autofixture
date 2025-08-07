@@ -113,7 +113,8 @@ class AutoFixture:
                 if type(_type) is type(Enum):
                     self.__generate_random_enum_field(_type, is_predictable_data, key, new_value, num)
 
-                if bool(typing.get_type_hints(_type)):
+
+                if has_type_hints(_type):
                     self.__generate_class_field(_type, key, nest, new_value, num, seed)
 
                 if typing.get_origin(_type) is list:
@@ -327,3 +328,20 @@ def all_annotations(cls):
             # object, at least, has no __annotations__ attribute.
             pass
     return d
+
+def has_type_hints(t):
+    origin = get_origin(t)
+    if origin is not None:
+        # It's a generic like list[LayoutItem], get the inner type(s)
+        args = get_args(t)
+        # For simplicity, just check the first arg recursively
+        if args:
+            return has_type_hints(args[0])
+        else:
+            return False
+    else:
+        # Normal class/type, try to get hints safely
+        try:
+            return bool(get_type_hints(t))
+        except Exception:
+            return False
