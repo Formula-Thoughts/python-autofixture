@@ -5,6 +5,7 @@ import uuid
 from decimal import Decimal
 from enum import Enum
 import random as rand
+from types import NoneType
 
 from autofixture.exceptions import AutoFixtureException
 
@@ -73,6 +74,12 @@ class AutoFixture:
 
             if (getattr(new_value, key) is None) or (
                     typing.get_origin(_type) is list and getattr(new_value, key) == []):
+
+                if typing.get_origin(_type) is typing.Union:
+                    args = typing.get_args(_type)
+                    non_none_args = [a for a in args if a is not NoneType]
+                    if len(non_none_args) == 1:
+                        _type = non_none_args[0]
 
                 if _type is str:
                     self.__generate_string_field(is_predictable_data, key, new_value, seed)

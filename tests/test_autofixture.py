@@ -2,6 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from decimal import Decimal
 from enum import Enum
+from typing import Optional
 from unittest import TestCase
 
 from autofixture import AutoFixture
@@ -64,6 +65,7 @@ class TestDto(InheritedDto):
     decimal_num: Decimal = None
     nested: NestedTestDto = None
     nested_list: list[NestedTestDto] = None
+    optional: Optional[int] = None
 
 
 class TestAutoFixture(TestCase):
@@ -101,6 +103,9 @@ class TestAutoFixture(TestCase):
 
         with self.subTest(msg="bool lists match"):
             self.assertEqual(dto.list_of_bools, [True, True])
+
+        with self.subTest(msg="bool optional ints match"):
+            self.assertEqual(dto.optional, 2)
 
         with self.subTest(msg="dates match"):
             self.assertEqual(dto.date.year, 2)
